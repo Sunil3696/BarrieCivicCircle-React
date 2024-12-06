@@ -241,7 +241,7 @@ const EditEventScreen = ({ route, navigation }) => {
         )}
 
         {existingImages.map((image, index) => (
-          <Image key={index} source={{ uri: `http://10.0.0.185:3000${image}` }} style={styles.imagePreview} />
+          <Image key={index} source={{ uri: `http://172.20.10.2:3000${image}` }} style={styles.imagePreview} />
         ))}
 
         <TouchableOpacity style={styles.imageButton} onPress={openImagePicker}>

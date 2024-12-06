@@ -16,7 +16,7 @@ export const login = async (email, password) => {
     await AsyncStorage.setItem('userToken', token);
     console.log('Token saved to AsyncStorage:', token);
 
-    return response.data; // Return the response data if needed
+    return response.data; 
   } catch (error) {
     console.error('Error during login:', error.response || error.message);
 

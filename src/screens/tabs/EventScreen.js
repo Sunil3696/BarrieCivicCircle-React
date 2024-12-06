@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Alert,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { fetchEvents } from '../../services/eventService';
@@ -15,24 +16,32 @@ import EventCard from './EventCard';
 const EventListScreen = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const loadEvents = async () => {
-      try {
-        const data = await fetchEvents();
-        setEvents(data || []);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-        setErrorMessage('Failed to load events.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const loadEvents = async () => {
+    try {
+      const data = await fetchEvents();
+      setEvents(data || []);
+      setErrorMessage(null); // Clear error message on successful load
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      setErrorMessage('Failed to load events.');
+    } finally {
+      setIsLoading(false);
+      setIsRefreshing(false); // Ensure refreshing stops
+    }
+  };
 
+  useEffect(() => {
     loadEvents();
   }, []);
+
+  const onRefresh = () => {
+    setIsRefreshing(true);
+    loadEvents();
+  };
 
   if (isLoading) {
     return <ActivityIndicator size="large" style={styles.loader} />;
@@ -41,10 +50,12 @@ const EventListScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Events</Text>
-      {errorMessage && (
-        <Text style={styles.error}>{errorMessage}</Text>
-      )}
-      <ScrollView>
+      {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
+      >
         {events.length > 0 ? (
           events.map((event) => (
             <TouchableOpacity

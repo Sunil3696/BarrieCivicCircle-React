@@ -7,7 +7,7 @@ const EventCard = ({ event }) => {
 
   const firstImageUrl =
     event.images && event.images.length > 0
-      ? `http://10.0.0.185:3000${event.images[0]}`
+      ? `http://172.20.10.2:3000${event.images[0]}`
       : null;
 
   return (
