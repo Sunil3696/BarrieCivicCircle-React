@@ -1,36 +1,54 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image } from 'react-native';
 import ForumScreen from '../screens/tabs/ForumScreen';
 import EventScreen from '../screens/tabs/EventScreen';
 import NotificationScreen from '../screens/tabs/NotificationScreen';
 import ProfileScreen from '../screens/tabs/ProfileScreen';
-import Icon from 'react-native-vector-icons/Ionicons'; // Import your desired icon set
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
+      tabBarIcon: ({ focused, size }) => {
+        let imageSource;
 
+        // Determine the image based on the route name
         switch (route.name) {
           case 'Forum':
-            iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
+            imageSource = focused
+              ? require('../../assets/chats.png')
+              : require('../../assets/chat.png');
             break;
           case 'Event':
-            iconName = focused ? 'calendar' : 'calendar-outline';
+            imageSource = focused
+              ? require('../../assets/calendaract.png')
+              : require('../../assets/calendar.png');
             break;
           case 'Notification':
-            iconName = focused ? 'notifications' : 'notifications-outline';
+            imageSource = focused
+              ? require('../../assets/notificationact.png')
+              : require('../../assets/notification.png');
             break;
           case 'Profile':
-            iconName = focused ? 'person' : 'person-outline';
+            imageSource = focused
+              ? require('../../assets/users.png')
+              : require('../../assets/user.png');
             break;
         }
 
-        // Return the icon component
-        return <Icon name={iconName} size={size} color={color} />;
+        // Return the Image component
+        return (
+          <Image
+            source={imageSource}
+            style={{
+              width: size,
+              height: size,
+              resizeMode: 'contain',
+            }}
+          />
+        );
       },
       tabBarActiveTintColor: 'tomato', // Active tab color
       tabBarInactiveTintColor: 'gray', // Inactive tab color
