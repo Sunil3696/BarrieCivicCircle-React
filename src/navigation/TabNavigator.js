@@ -50,8 +50,8 @@ const TabNavigator = () => (
           />
         );
       },
-      tabBarActiveTintColor: 'tomato', // Active tab color
-      tabBarInactiveTintColor: 'gray', // Inactive tab color
+      tabBarActiveTintColor: 'tomato', 
+      tabBarInactiveTintColor: 'gray', 
     })}
   >
     <Tab.Screen name="Forum" component={ForumScreen} />

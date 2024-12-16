@@ -19,7 +19,7 @@ const MainStackNavigator = () => (
       options={{ headerTitle: 'Forum Details' }}
     />
      <Stack.Screen
-      name="EventDetail" // Corrected navigation name
+      name="EventDetail" 
       component={EventDetailScreen}
       options={{ headerTitle: 'Event Details' }}
     />
