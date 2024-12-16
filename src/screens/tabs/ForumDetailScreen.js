@@ -78,7 +78,7 @@ const ForumDetailScreen = ({ route }) => {
         </Text>
         {forum?.images && forum.images.length > 0 && (
           <Image
-            source={{ uri: `http://172.20.10.2:3000${forum.images[0]}` }}
+            source={{ uri: `http://10.0.0.185:3000${forum.images[0]}` }}
             style={styles.image}
           />
         )}

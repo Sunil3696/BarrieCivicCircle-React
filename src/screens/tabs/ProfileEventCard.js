@@ -5,7 +5,7 @@ const ProfileEventCard = ({ event, onDelete, onEdit }) => {
   return (
     <View style={styles.card}>
       {event.images?.[0] && (
-        <Image source={{ uri: `http://172.20.10.2:3000${event.images[0]}` }} style={styles.image} />
+        <Image source={{ uri: `http://10.0.0.185:3000${event.images[0]}` }} style={styles.image} />
       )}
       <Text style={styles.title}>{event.title}</Text>
       <Text style={styles.description}>{event.description}</Text>
